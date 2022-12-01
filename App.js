@@ -8,16 +8,18 @@ function App()
 	const [grocList,setgrocList]=useState([])
 	let issupdateVal=false;
 	const [updatVal,setupdateval]=useState("")
+	const [changeid,setchangeid]=useState("")
 	const updatevalue=(event)=>{
 		event.preventDefault()
 		let idi=uuid();
 		issupdateVal? setgrocList(grocList.filter((data)=>{
-			if( data.id===groc.id){return data.Grocery=updatVal}
+			if(data.id===changeid){return data.Grocery=updatVal}
 			return data
 		}))
 		:setgrocList([...grocList,{Grocery:grocery,id:idi}])
 		setGrocery("")
 	}
+
 	const deleteitem=(groc)=>{
 		setgrocList(grocList.filter((data)=>{
 			return data.id!=groc.id
@@ -26,20 +28,21 @@ function App()
 
 	return (
 	<div id="main">
-		<input type="text" onChange={(event)=>{!issupdateVal?setGrocery(event.target.value):setupdateval(event.target.value)}} value={grocery}/>
+		<input type="text" onChange={(event)=>{!issupdateVal?setGrocery(event.target.value):setupdateval(event.target.value)}} id="grocery" value={grocery}/>
 		<button onClick={updatevalue}>Add</button>
 		<table>
-            
+            <tbody>
             {grocList.map((grocery,index)=>{
                 return (
                     <tr key={index}>
                         <td >{grocery.Grocery}</td> 
-                       <button onClick={()=>{deleteitem(grocery)}}>Delete</button>
-                       <button onClick={()=>{issupdateVal=true}}>Delete</button>
+                      <td> <button onClick={()=>{deleteitem(grocery)}}>Delete</button></td>
+                       <td><label htmlFor="grocery" onClick={()=>{setchangeid(grocery.id),issupdateVal=true}}>Delete {console.log(issupdateVal,grocery.id)}</label></td>
                     </tr>
                 )
             })
 			}
+			</tbody>
         </table>
 	</div>
 	);
