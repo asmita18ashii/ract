@@ -37,7 +37,7 @@ function App()
                     <tr key={index}>
                         <td >{grocery.Grocery}</td> 
                       <td> <button onClick={()=>{deleteitem(grocery)}}>Delete</button></td>
-                       <td><label htmlFor="grocery" onClick={()=>{setchangeid(grocery.id),issupdateVal=true}}>Delete {console.log(issupdateVal,grocery.id)}</label></td>
+                       <td><label htmlFor="grocery" onClick={()=>{setchangeid(grocery.id),issupdateVal=true}}>update {console.log(issupdateVal,grocery.id)}</label></td>
                     </tr>
                 )
             })
